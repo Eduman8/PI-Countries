@@ -12,7 +12,7 @@ import {
     LOADING
 } from './Constantes'
 
-const url = "http://localhost:3001/countries/"
+const url = "http://localhost:3001"
 
 export function getCountries() {
     return async function (dispatch) {
@@ -82,7 +82,7 @@ export function byContinent(payload) {
 
 export function byActivity(payload) {
     return {
-        tipe: BY_ACTIVITY,
+        type: BY_ACTIVITY,
         payload
     }
 }

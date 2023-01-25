@@ -1,0 +1,16 @@
+h2 {
+    text-decoration: underline;
+    height: 50px;
+    color: rgb(191, 190, 215);
+    font-size: 25px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+}
+
+h4 {
+    text-decoration: underline;
+    color: rgb(191, 190, 215);
+    font-size: 20px;
+    font-weight: 500;
+    font-style: italic;
+}

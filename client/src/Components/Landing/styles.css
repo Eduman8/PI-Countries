@@ -23,7 +23,7 @@
     border-radius: 6px;
     box-shadow: rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, rgba(58, 65, 111, .5) 0 -3px 0 inset;
     box-sizing: border-box;
-    color: #fff;
+    color: #553c9a;
     cursor: pointer;
     display: inline-flex;
     font-family: "JetBrains Mono", monospace;
@@ -47,15 +47,38 @@
   }
 
   .btn-primary:focus {
-    box-shadow: #000000 0 0 0 1.5px inset, rgba(45, 35, 66, .4) 0 2px 4px, rgba(194, 189, 205, 0.3) 0 7px 13px -3px, #2d2f3b 0 -3px 0 inset;
+    box-shadow: #553c9a 0 0 0 1.5px inset, rgba(148, 111, 229, 0.801) 0 2px 4px, rgba(146, 111, 223, 0.922) 0 7px 13px -3px, #b393d3 0 -3px 0 inset;
   }
 
   .btn-primary:hover {
-    box-shadow: rgba(45, 35, 66, .4) 0 4px 8px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #2d2f3b 0 -3px 0 inset;
+    box-shadow: rgba(106, 72, 179, 0.714) 0 4px 8px, rgba(106, 72, 179, 0.714) 0 7px 13px -3px, #553c9a 0 -3px 0 inset;
     transform: translateY(-2px);
   }
 
   .btn-primary:active {
-    box-shadow: #2d2f3b 0 3px 7px inset;
+    box-shadow: #553c9a 0 3px 7px inset;
     transform: translateY(2px);
+  }
+
+  .title {
+    display: inline-block;
+    position: absolute;
+    margin-left: -8rem;
+    background-image: linear-gradient(to left, #553c9a, #b393d3);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 2px 2px 1px #000000, 0 0 1em #553c9a, 0 0 0.2em #b393d3;
+  }
+
+  .contacto {
+    font-size: 20px;
+    display: inline-block;
+    position: absolute;
+    margin-left: 43rem;
+    background-image: linear-gradient(to left, #553c9a, #b393d3);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 3px 4px 10px #000000, 0 0 1em #553c9a, 0 0 0.2em #b393d3;
   }
