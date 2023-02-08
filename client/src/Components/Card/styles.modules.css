@@ -1,10 +1,11 @@
 h2 {
     text-decoration: underline;
     height: 50px;
-    color: rgb(191, 190, 215);
+    color: rgb(255, 255, 255);
     font-size: 25px;
     font-family: 'Lato', sans-serif;
     font-weight: 700;
+    text-shadow: 10px 10px 15px black;
 }
 
 h4 {

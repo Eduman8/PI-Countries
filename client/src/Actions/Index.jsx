@@ -51,7 +51,7 @@ export function getDetail(id) {
 export function postActivity(payload) {
     return async function () {
         try {
-            const res = await axios.post("http://localhost:3001/countries/activity", payload)
+            const res = await axios.post(`${url}/activities`, payload)
             return res;
         } catch (error) {
             console.log(error)

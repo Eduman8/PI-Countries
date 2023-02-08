@@ -13,7 +13,6 @@ function Paginate({ countriesPerPage, allCountries, paginado }) {
             <ul className="ul">
                 {pageNumber && pageNumber.map((number) => {
                     return (
-
                         <li key={number}>
                             <label className="span" onClick={() => paginado(number)}>{number}</label>
                         </li>

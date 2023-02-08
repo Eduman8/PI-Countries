@@ -5,6 +5,7 @@ import Card from '../Card/Card'
 import Paginate from '../Paginate/Paginate'
 import { byActivity, byOrder, byPopulation, getActivity, getCountries, byContinent } from '../../Actions/Index'
 import './styles.modules.css'
+import NavBar from '../NavBar'
 
 function Home() {
     const dispatch = useDispatch()
@@ -55,16 +56,19 @@ function Home() {
     return (
         <div className='container'>
             <div className='fondo'>
+                <div className='nav-bar'>
+                    < NavBar />
+                </div>
                 <div className='Filtros'>
                     <div className='Filtro'>
-                        <select onChange={handleOrderPopulation}>
+                        <select className='selectors' onChange={handleOrderPopulation}>
                             <option value='Select'>Population</option>
                             <option value='Min' key='Min'>Min Population</option>
                             <option value='Max' key='Max'>Max Population</option>
                         </select>
                     </div>
                     <div className='Filtro'>
-                        <select onChange={handleContinents}>
+                        <select className='selectors' onChange={handleContinents}>
                             <option value='Select'>Continents</option>
                             <option value='All' key='All'>All Continents</option>
                             <option value='Africa' key='Africa'>Africa</option>
@@ -77,14 +81,14 @@ function Home() {
                         </select>
                     </div>
                     <div className='Filtro'>
-                        <select onChange={handleActivity}>
+                        <select className='selectors' onChange={handleActivity}>
                             <option value='Select'> Activities</option>
                             <option value='All'>All Activities</option>
                             {activity.map(e => (<option value={e} key={e}>{e}</option>))}
                         </select>
                     </div>
                     <div className='Filtro'>
-                        <select onChange={handleOrder}>
+                        <select className='selectors' onChange={handleOrder}>
                             <option value="Select">Alphabet</option>
                             <option value="Asc" key="Asc">A-Z</option>
                             <option value="Desc" key="Desc">Z-A</option>

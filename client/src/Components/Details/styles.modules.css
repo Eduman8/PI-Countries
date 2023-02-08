@@ -1,22 +1,25 @@
-.card {
-    display: inline-block;
+.background {
+    display: grid;
     background-image: url('..//Assets/Earth.jpg');
-    background-repeat: no-repeat;
     background-size: cover;
-    width: 1536px;
+    width: 100%;
+    height: 100%;
     height: 703px;
-
+    overflow: hidden;
 }
 
 .card img {
     width: 300px;
     height: 150px;
+
 }
 
-h2{
+h2 {
     text-align: center;
     font-size: xx-large;
     font-weight: 800;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-shadow: 3px 4px 10px #b393d3, 0 0 1em #553c9a, 0 0 0.9em #b393d3;
 }
 
 h3 {
@@ -29,3 +32,9 @@ p {
     font-weight: 600;
     color: rgb(255, 255, 255);
 }
+
+.details{
+    display: flex;
+    justify-content: space-evenly;
+}
+
