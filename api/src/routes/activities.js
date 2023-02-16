@@ -18,18 +18,27 @@ router.post('/', async function (req, res) {
             difficulty,
             duration,
             season,
-        });
+            countries,
+        }
+        );
+        let newActivity = {
+            name,
+            difficulty,
+            duration,
+            season,
+            countries
+        }
+
         const paisActividad = await Country.findAll({
             where: { name: countries },
         });
         actividad.addCountries(paisActividad);
-        res.status(200).send("Activity Created")
+        res.status(200).send(newActivity);
     } catch (e) {
         console.log(e)
     }
 
 
 });
-
 
 module.exports = router;

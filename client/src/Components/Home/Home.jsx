@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Card from '../Card/Card'
 import Paginate from '../Paginate/Paginate'
-import { byActivity, byOrder, byPopulation, getActivity, getCountries, byContinent } from '../../Actions/Index'
+import { byActivity, byOrder, byPopulation, getCountries, byContinent } from '../../Actions/Index'
 import './styles.modules.css'
 import NavBar from '../NavBar'
 
@@ -17,6 +17,7 @@ function Home() {
     const indexLastCountry = currentPage * countriesPerPage;
     const indexFirstCountry = indexLastCountry - countriesPerPage;
     const allCountries = countries.slice(indexFirstCountry, indexLastCountry);
+
 
 
     useEffect(() => {
@@ -48,10 +49,14 @@ function Home() {
         dispatch(byActivity(e.target.value))
         setOrder(e.target.value)
     }
+    
 
-    useEffect(() => {
-        dispatch(getActivity())
-    }, [dispatch])
+    function handleClick(e) {
+        e.preventDefault();
+        dispatch(getCountries());
+        window.location.reload()
+    }
+
 
     return (
         <div className='container'>
@@ -69,7 +74,6 @@ function Home() {
                     </div>
                     <div className='Filtro'>
                         <select className='selectors' onChange={handleContinents}>
-                            <option value='Select'>Continents</option>
                             <option value='All' key='All'>All Continents</option>
                             <option value='Africa' key='Africa'>Africa</option>
                             <option value='Antarctica' key='Antarctica'>Antarctica</option>
@@ -84,7 +88,12 @@ function Home() {
                         <select className='selectors' onChange={handleActivity}>
                             <option value='Select'> Activities</option>
                             <option value='All'>All Activities</option>
-                            {activity.map(e => (<option value={e} key={e}>{e}</option>))}
+                            {activity.map(e => {
+                                return (
+                                    <option value={e.name} key={e.id} >{e.name}</option>
+
+                                );
+                            })}
                         </select>
                     </div>
                     <div className='Filtro'>
@@ -94,7 +103,13 @@ function Home() {
                             <option value="Desc" key="Desc">Z-A</option>
                         </select>
                     </div>
+                    <div className='Filtro'>
+                        <button onClick={e => { handleClick(e) }} className='selectors'>
+                            Limpiar filtros
+                        </button>
+                    </div>
                 </div>
+
                 <div className='boxing'>
                     {allCountries?.map((e) => {
                         return (

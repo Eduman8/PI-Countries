@@ -1,5 +1,5 @@
-import React from 'react'
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { getDetail, getCountries } from '../../Actions/Index'
 import styles from './styles.modules.css'
@@ -8,27 +8,21 @@ import { Link } from 'react-router-dom'
 import { BsHouseFill } from 'react-icons/bs'
 
 
-function Details(props) {
-
+function Details() {
+    let { id } = useParams();
     const dispatch = useDispatch()
     const details = useSelector(state => state.details)
     const loading = useSelector(state => state.loading)
+    const allActivities = useSelector(state => state.allActivities)
+
+
     const HandleDispatch = () => {
         dispatch(getCountries())
     }
 
     useEffect(() => {
-        dispatch(getDetail(props.match.params.id))
+        dispatch(getDetail(id))
     }, [dispatch])
-
-    const activities = details.activities?.map(e => {
-        return {
-            name: e.name,
-            difficulty: e.difficulty,
-            duration: e.duration,
-            season: e.season
-        }
-    })
 
 
     return (
@@ -44,25 +38,29 @@ function Details(props) {
                             <img src={details.image} alt={details.name} className={styles.imagen} />
                         </div>
                         <div className='details'>
-                            <div >
+                            <div  >
                                 <h3>Details:</h3>
                                 <p>Code: {details.id}</p>
                                 <p>Continent: {details.continent}</p>
                                 <p>Capital: {details.capital}</p>
                                 <p>Population: {details.population}</p>
+                                <p>Area: {details.area}Km</p>
                                 <p>Subregion: {details.subregion}</p>
                             </div>
                             <div >
                                 <h3>Activities:</h3>
-                                {activities?.length > 0 ? activities?.map(e => {
-                                    return (
-                                        <div key={e.id}>
-                                            <p>Name: {e.name}</p>
-                                            <p>Difficulty: {e.difficulty}</p>
-                                            <p>Duration: {e.duration}</p>
-                                            <p>Season: {e.season}</p>
-                                        </div>
-                                    )
+                                {allActivities?.length > 0 ? allActivities?.map(e => {
+                                    if (e.countries.includes(details.id)) {
+                                        return (
+                                            <div key={e.id}>
+                                                <p>Name: {e.name}</p>
+                                                <p>Difficulty: {e.difficulty}</p>
+                                                <p>Duration: {e.duration}</p>
+                                                <p>Season: {e.season}</p>
+                                            </div>
+                                            
+                                        )
+                                    }
                                 })
                                     : <p>Without activities</p>}
                             </div>

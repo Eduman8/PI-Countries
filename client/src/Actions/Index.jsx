@@ -1,15 +1,14 @@
 import axios from 'axios'
 import {
-    GET_ACTIVITY,
     BY_ACTIVITY,
     BY_CONTINENT,
     BY_NAME,
     BY_ORDER,
     BY_POPULATION,
     GET_COUNTRIES,
+    POST_ACTIVITY,
     GET_DETAIL,
-    FAILURE,
-    LOADING
+    LOADING,
 } from './Constantes'
 
 const url = "http://localhost:3001"
@@ -23,13 +22,11 @@ export function getCountries() {
                 payload: res.data
             })
         } catch (error) {
-            return dispatch({
-                type: FAILURE,
-                payload: error.response.data.msg
-            })
+            console.log(error)
         }
     }
 }
+
 
 export function getDetail(id) {
     return async function (dispatch) {
@@ -49,15 +46,19 @@ export function getDetail(id) {
 }
 
 export function postActivity(payload) {
-    return async function () {
+    return async function (dispatch) {
         try {
             const res = await axios.post(`${url}/activities`, payload)
-            return res;
+            return dispatch({
+                type: POST_ACTIVITY,
+                payload: res.data
+            })
         } catch (error) {
             console.log(error)
         }
     }
 }
+
 
 export function byOrder(payload) {
     return {
@@ -93,23 +94,6 @@ export function getByName(name) {
             const res = await axios.get(`${url}/countries?name=${name}`)
             return dispatch({
                 type: BY_NAME,
-                payload: res.data
-            })
-        } catch (error) {
-            return dispatch({
-                type: FAILURE,
-                payload: error.response.data.msg
-            })
-        }
-    }
-}
-
-export function getActivity() {
-    return async function (dispatch) {
-        try {
-            const res = await axios.get(`${url}/activity`)
-            return dispatch({
-                type: GET_ACTIVITY,
                 payload: res.data
             })
         } catch (error) {

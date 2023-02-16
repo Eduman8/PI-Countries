@@ -1,14 +1,13 @@
 import {
-    GET_ACTIVITY,
     BY_CONTINENT,
     BY_NAME,
     BY_ORDER,
     BY_POPULATION,
     GET_COUNTRIES,
+    POST_ACTIVITY,
     GET_DETAIL,
     BY_ACTIVITY,
-    FAILURE,
-    LOADING
+    LOADING,
 } from '../Actions/Constantes'
 
 const initialState = {
@@ -21,7 +20,6 @@ const initialState = {
     error: '',
     loading: false
 }
-
 function reducer(state = initialState, action) {
     switch (action.type) {
         case GET_COUNTRIES:
@@ -31,7 +29,6 @@ function reducer(state = initialState, action) {
                 countries: action.payload,
                 allContinents: action.payload,
                 population: action.payload,
-                allActivities: action.payload,
                 searchName: action.payload,
             }
         case GET_DETAIL:
@@ -41,10 +38,16 @@ function reducer(state = initialState, action) {
                 loading: false
             }
         case BY_NAME:
-            return {
-                ...state,
-                countries: action.payload,
-                error: ''
+            if (action.payload.length === 0) {
+                return {
+                    ...state,
+                    error: 'Country not found'
+                }
+            } else {
+                return {
+                    ...state,
+                    countries: action.payload,
+                }
             }
         case BY_ORDER:
             const orderCountries = action.payload === 'Asc' ?
@@ -71,12 +74,6 @@ function reducer(state = initialState, action) {
                 countries: orderCountries
             }
 
-        case GET_ACTIVITY:
-            return {
-                ...state,
-                loading: false,
-                activity: action.payload
-            }
         case BY_POPULATION:
             const orderPopulation = action.payload === 'Min' ?
                 state.countries.sort(function (a, b) {
@@ -110,17 +107,19 @@ function reducer(state = initialState, action) {
                 countries: continentFilter
             }
         case BY_ACTIVITY:
-            const allActivities = state.allActivities;
-            const activityFilter = action.payload === 'All' ? allActivities.filter(e => e.activities.length > 0) :
-                allActivities.filter(c => c.activities.find((el) => el.name.toLowerCase() === action.payload))
+            const countriesActivities = state.allActivities;
+            const activityFilter = action.payload === 'All' ? countriesActivities : countriesActivities.filter(e =>
+                e.activities?.map(el => el.name).includes(action.payload)
+            );
             return {
                 ...state,
                 countries: activityFilter
-            }
-        case FAILURE:
+            };
+        case POST_ACTIVITY:
             return {
                 ...state,
-                error: action.payload
+                allActivities: [...state.allActivities, action.payload]
+
             }
         case LOADING:
             return {

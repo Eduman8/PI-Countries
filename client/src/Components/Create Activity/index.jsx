@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom'
-import { getActivity, getCountries, postActivity } from '../../Actions/Index'
+import { getCountries, postActivity } from '../../Actions/Index'
 import './styles.modules.css'
 import Swal from 'sweetalert2'
 import { BsHouseFill } from 'react-icons/bs'
@@ -43,9 +43,7 @@ function AddActivity() {
         dispatch(getCountries())
     }, [dispatch])
 
-    useEffect(() => {
-        dispatch(getActivity())
-    }, [dispatch])
+
 
     function handleChange(e) {
         setInput({
@@ -105,10 +103,10 @@ function AddActivity() {
             countries: []
         })
         history.push('/countries')
-        Swal.fire({
-            title: 'Activity created successfully',
-            confirmButtonColor: "#34a57f"
-        }
+        Swal.fire(
+            'Good job!',
+            'Activity created succesfully!',
+            'success'
         )
     }
 
@@ -173,7 +171,7 @@ function AddActivity() {
                             {input.countries.map(i =>
                                 <div>
                                     {i}
-                                    <button className='close-btn' onClick={() => handleDelete(i)} type='button'>x</button>
+                                    <button className='close-btn' onClick={() => handleDelete(i)} type='button'>X</button>
                                 </div>)}
                         </li>
                     </div>

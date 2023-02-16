@@ -1,8 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux'
-import { getByName, getCountries } from '../../Actions/Index'
+import { getByName } from '../../Actions/Index'
 import './styles.modules.css'
+import Swal from 'sweetalert2'
+
 
 export default function SearchBar() {
     const [Country, setCountry] = useState('')
@@ -11,12 +13,17 @@ export default function SearchBar() {
 
     function Search(pais) {
         if (pais === '') {
-            dispatch(getCountries())
-            dispatch(getByName(''))
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+                footer: 'Please insert a country name!'
+            })
         } else {
             dispatch(getByName(pais))
         }
     }
+
 
     return (
         <>
