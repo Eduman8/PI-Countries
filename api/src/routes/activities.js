@@ -23,7 +23,7 @@ router.post('/', async function (req, res) {
         );
         let newActivity = {
             name,
-            difficulty,
+            difficulty, 
             duration,
             season,
             countries
@@ -33,6 +33,7 @@ router.post('/', async function (req, res) {
             where: { name: countries },
         });
         actividad.addCountries(paisActividad);
+        console.log(paisActividad)
         res.status(200).send(newActivity);
     } catch (e) {
         console.log(e)
