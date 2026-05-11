@@ -71,7 +71,7 @@ function Home() {
                 <section className='home-hero'>
                     <p className='home-kicker'>Explorá el mundo</p>
                     <h1>Países, banderas y actividades turísticas</h1>
-                    <p className='home-description'>Buscá, filtrá y organizá países con una interfaz clara y lista para portfolio.</p>
+                    <p className='home-description'>Buscá, filtrá y organizá países.</p>
                 </section>
 
                 <div className='Filtros' aria-label='Filtros de países'>
