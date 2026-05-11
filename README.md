@@ -6,13 +6,19 @@ El proyecto nació como una práctica individual de bootcamp y fue estabilizado 
 
 ## Vista previa
 
-> Capturas sugeridas antes de publicar el portfolio:
->
-> - `"C:\Users\eduma\Downloads\Screenshot 2026-05-11 at 19-19-52 Henry Countries.png"` — pantalla principal con filtros y cards de países.
-> - `https://res.cloudinary.com/dbkfkpjjl/image/upload/v1778542720/Screenshot_2026-05-11_at_19-20-00_Henry_Countries_lnk18w.png` — detalle de país con actividades asociadas.
-> - `https://res.cloudinary.com/dbkfkpjjl/image/upload/v1778542732/Screenshot_2026-05-11_at_19-20-14_Henry_Countries_xn5q9b.png` — formulario responsive para crear actividades.
->
-> Podés generarlas manualmente después de levantar la aplicación en local.
+## Capturas
+
+### Pantalla principal
+
+![Pantalla principal](https://res.cloudinary.com/dbkfkpjjl/image/upload/v1778542720/Screenshot_2026-05-11_at_19-19-52_Henry_Countries.png)
+
+### Detalle de país
+
+![Detalle de país](https://res.cloudinary.com/dbkfkpjjl/image/upload/v1778542720/Screenshot_2026-05-11_at_19-20-00_Henry_Countries_lnk18w.png)
+
+### Crear actividad
+
+![Formulario para crear actividad](https://res.cloudinary.com/dbkfkpjjl/image/upload/v1778542732/Screenshot_2026-05-11_at_19-20-14_Henry_Countries_xn5q9b.png)
 
 ## Stack tecnológico
 
@@ -61,7 +67,3 @@ El proyecto nació como una práctica individual de bootcamp y fue estabilizado 
 
 - GitHub: [Eduman8](https://github.com/Eduman8)
 - LinkedIn: [Eduardo Damián Gómez](https://www.linkedin.com/in/eduardo-dami%C3%A1n-g%C3%B3mez-89a432217/)
-
-## Estado para portfolio
-
-El proyecto es apto como pieza de portfolio junior frontend/fullstack después de agregar capturas y URLs de deploy. Demuestra flujo full-stack, integración con API externa, modelado relacional, manejo de estado con Redux, diseño responsive y pruebas básicas.
