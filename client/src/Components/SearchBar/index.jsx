@@ -3,40 +3,29 @@ import { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { getByName } from '../../Actions/Index'
 import './styles.modules.css'
-import Swal from 'sweetalert2'
 
-
-export default function SearchBar() {
-    const [Country, setCountry] = useState('')
+export default function SearchBar({ onSearch }) {
+    const [country, setCountry] = useState('')
     const dispatch = useDispatch()
     const error = useSelector(state => state.error)
 
-    function Search(pais) {
-        if (pais === '') {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Something went wrong!',
-                footer: 'Please insert a country name!'
-            })
-        } else {
-            dispatch(getByName(pais))
-        }
+    function search(pais) {
+        dispatch(getByName(pais))
+        if (onSearch) onSearch()
     }
-
 
     return (
         <>
             <form onSubmit={(e) => {
                 e.preventDefault();
-                Search(Country)
+                search(country)
                 setCountry('')
             }}>
                 <input
                     type='text'
                     className="search-input"
                     placeholder="Country..."
-                    value={Country}
+                    value={country}
                     onChange={e => setCountry(e.target.value)}
                 />
                 <input className="btn-search" type='submit' value='Search' />

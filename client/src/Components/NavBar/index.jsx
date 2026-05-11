@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom'
-import { getCountries } from "../../Actions/Index";
+import { clearFilters, getCountries } from "../../Actions/Index";
 import { useDispatch } from "react-redux";
 import SearchBar from "../SearchBar";
 import { GiWorld } from 'react-icons/gi'
@@ -8,10 +8,11 @@ import { BsHouseFill } from 'react-icons/bs'
 import { RiAddLine } from 'react-icons/ri'
 import './styles.modules.css'
 
-const NavBar = () => {
+const NavBar = ({ onSearch }) => {
     const dispatch = useDispatch()
 
     const HandleDispatch = () => {
+        dispatch(clearFilters())
         dispatch(getCountries())
     }
 
@@ -21,7 +22,7 @@ const NavBar = () => {
                 <div className='cosas'>
                     <Link className="main" to='/'>< GiWorld />Henry Countries</Link>
                     <div className='search-bar'>
-                        <SearchBar />
+                        <SearchBar onSearch={onSearch} />
                     </div>
                     <div className='links'>
                         <Link className="ul-nav-home" to='/countries' onClick={() => HandleDispatch()}><BsHouseFill />Home</Link>

@@ -2,51 +2,71 @@ const { Router } = require('express');
 const { Country, Activity } = require('../db');
 const router = Router();
 
-router.get('/', async (req, res) => {
-    const { name } = req.query
-    const allCountries = await Country.findAll({
-        include: Activity
-    })
+function formatActivity(activity) {
+    return {
+        id: activity.id,
+        name: activity.name,
+        difficulty: activity.difficulty,
+        duration: activity.duration,
+        season: activity.season
+    };
+}
 
-    if (name) {
-        const byName = await allCountries.filter(i => i.name.toLowerCase().startsWith(name.toLowerCase()))
-        byName.length ?
-            res.json(byName) :
-            res.status(404).send('Pais no Encontrado')
-    } else {
-        res.json(allCountries)
+function formatCountry(country) {
+    const data = country.toJSON ? country.toJSON() : country;
+
+    return {
+        id: data.id,
+        name: data.name,
+        image: data.image,
+        continent: data.continent,
+        capital: data.capital,
+        subregion: data.subregion,
+        area: data.area,
+        population: data.population,
+        activities: (data.activities || []).map(formatActivity)
+    };
+}
+
+router.get('/', async (req, res, next) => {
+    const { name } = req.query
+
+    try {
+        const allCountries = await Country.findAll({
+            include: [{
+                model: Activity,
+                through: { attributes: [] },
+            }]
+        })
+
+        if (name) {
+            const normalizedName = name.toLowerCase();
+            const byName = allCountries.filter(i => i.name.toLowerCase().includes(normalizedName))
+            return res.json(byName.map(formatCountry))
+        }
+
+        res.json(allCountries.map(formatCountry))
+    } catch (error) {
+        next(error)
     }
 });
 
 router.get('/:id', async (req, res, next) => {
     const { id } = req.params;
-    let countries
 
     try {
-        if (id.length > 1) {
-            countries = await Country.findByPk(id, { include: Activity })
+        const country = await Country.findByPk(id.toUpperCase(), {
+            include: [{
+                model: Activity,
+                through: { attributes: [] },
+            }]
+        })
 
-            countries = {
-                id: countries.id,
-                name: countries.name,
-                image: countries.image,
-                continent: countries.continent,
-                capital: countries.capital,
-                subregion: countries.subregion,
-                area: countries.area,
-                population: countries.population,
-                activities: countries.activities.map((e) => {
-                    return {
-                        id: e.id,
-                        name: e.name,
-                        difficulty: e.difficulty,
-                        duration: e.duration,
-                        season: e.season
-                    }
-                })
-            }
+        if (!country) {
+            return res.status(404).json({ error: 'Country not found' })
         }
-        res.json(countries)
+
+        return res.json(formatCountry(country))
     } catch (error) {
         next(error)
     }
