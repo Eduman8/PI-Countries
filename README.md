@@ -1,29 +1,29 @@
 # Henry Countries
 
-A full-stack countries explorer built with React, Redux, Express, Sequelize and PostgreSQL. The app lets users browse countries, search and filter results, inspect country details, and create tourist activities associated with one or more countries.
+Henry Countries es una aplicación full-stack para explorar países, consultar información geográfica y crear actividades turísticas asociadas a uno o más países. Permite navegar un listado paginado, buscar por nombre, aplicar filtros, ordenar resultados, revisar el detalle de cada país y registrar nuevas actividades.
 
-This repository started as a bootcamp individual project and has been stabilized and polished to be portfolio-ready while keeping the original stack and architecture.
+El proyecto nació como una práctica individual de bootcamp y fue estabilizado con foco en presentación profesional para portfolio, manteniendo el stack y la arquitectura original.
 
-## Preview
+## Vista previa
 
-> Suggested screenshots to add before publishing the portfolio:
+> Capturas sugeridas antes de publicar el portfolio:
 >
-> - `docs/screenshots/home-desktop.png` — Home page with filters and country cards.
-> - `docs/screenshots/details-desktop.png` — Country detail page with activities.
-> - `docs/screenshots/create-activity-mobile.png` — Responsive create activity form.
+> - `docs/screenshots/home-desktop.png` — pantalla principal con filtros y cards de países.
+> - `docs/screenshots/details-desktop.png` — detalle de país con actividades asociadas.
+> - `docs/screenshots/create-activity-mobile.png` — formulario responsive para crear actividades.
 >
-> You can generate these manually after running the app locally.
+> Podés generarlas manualmente después de levantar la aplicación en local.
 
-## Tech stack
+## Stack tecnológico
 
 ### Frontend
 
 - React 17
-- Redux classic + Redux Thunk
+- Redux clásico + Redux Thunk
 - React Router DOM v5
 - Axios
-- CSS Modules-style component styles / plain CSS
-- SweetAlert2 for lightweight feedback
+- Estilos por componente con CSS plano / convención tipo CSS Modules
+- SweetAlert2 para mensajes de feedback
 - Jest + React Testing Library
 
 ### Backend
@@ -32,107 +32,107 @@ This repository started as a bootcamp individual project and has been stabilized
 - Express
 - Sequelize
 - PostgreSQL
-- Axios for Rest Countries seeding
-- Mocha, Chai and Supertest
+- Axios para la carga inicial desde Rest Countries
+- Mocha, Chai y Supertest
 
-### External API
+### API externa
 
-- [Rest Countries](https://restcountries.com/) for the initial countries seed.
+- [Rest Countries](https://restcountries.com/) para poblar inicialmente la base de datos de países.
 
-## Main features
+## Funcionalidades principales
 
-- Browse countries with flag, name and continent.
-- Search countries by partial name.
-- Filter by continent.
-- Filter by associated tourist activity.
-- Sort alphabetically and by population.
-- Paginated country grid.
-- Country detail page with capital, subregion, area, population and activities.
-- Create tourist activities and associate them with multiple countries.
-- Responsive UI for desktop, tablet and mobile.
-- Basic loading, empty and error states.
-- Backend validation for countries, activities and country/activity relationships.
+- Listado de países con bandera, nombre y continente.
+- Búsqueda de países por coincidencia parcial de nombre.
+- Filtro por continente.
+- Filtro por actividad turística asociada.
+- Orden alfabético y orden por población.
+- Grilla paginada de países.
+- Vista de detalle con capital, subregión, área, población y actividades.
+- Creación de actividades turísticas asociadas a múltiples países.
+- Interfaz responsive para desktop, tablet y mobile.
+- Estados básicos de carga, vacío y error.
+- Validaciones en backend para países, actividades y relaciones país/actividad.
 
-## Architecture overview
+## Arquitectura
 
 ```text
 PI-Countries/
 ├── api/
-│   ├── index.js              # API startup, DB sync and country seed
+│   ├── index.js              # Inicio de API, sincronización de DB y seed de países
 │   ├── src/
-│   │   ├── app.js            # Express app, middleware, CORS and errors
-│   │   ├── db.js             # Sequelize connection and model relations
-│   │   ├── models/           # Country and Activity models
-│   │   └── routes/           # /countries and /activities routes
-│   └── tests/                # Backend model and route tests
+│   │   ├── app.js            # App Express, middleware, CORS y manejo de errores
+│   │   ├── db.js             # Conexión Sequelize y relaciones entre modelos
+│   │   ├── models/           # Modelos Country y Activity
+│   │   └── routes/           # Rutas /countries y /activities
+│   └── tests/                # Tests de modelos y rutas del backend
 └── client/
     ├── public/
     └── src/
-        ├── Actions/          # Redux actions and API calls
-        ├── Components/       # UI pages/components
-        ├── Reducer/          # Redux reducer and reducer tests
-        └── Store/            # Redux store
+        ├── Actions/          # Acciones Redux y llamadas a la API
+        ├── Components/       # Páginas y componentes de UI
+        ├── Reducer/          # Reducer Redux y tests del reducer
+        └── Store/            # Configuración del store
 ```
 
-The frontend and backend are designed to be deployed separately. The frontend reads the API base URL from `REACT_APP_API_URL`, and the backend reads the allowed client origin from `CLIENT_URL`.
+Frontend y backend están pensados para desplegarse por separado. El frontend lee la URL base de la API desde `REACT_APP_API_URL` y el backend lee el origen permitido del cliente desde `CLIENT_URL`.
 
-## Environment variables
+## Variables de entorno
 
 ### Backend (`api/.env`)
 
-Create a local file from the example:
+Crear un archivo local a partir del ejemplo:
 
 ```bash
 cd api
 cp .env.example .env
 ```
 
-Available variables:
+Variables disponibles:
 
-| Variable | Required | Description | Example |
+| Variable | Obligatoria | Descripción | Ejemplo |
 | --- | --- | --- | --- |
-| `PORT` | No | API port. | `3001` |
-| `NODE_ENV` | No | Runtime environment. | `development` |
-| `CLIENT_URL` | Yes for deploy | Frontend origin allowed by CORS. | `http://localhost:3000` |
-| `DB_USER` | Yes locally | PostgreSQL username. | `postgres` |
-| `DB_PASSWORD` | Yes locally | PostgreSQL password. | `postgres` |
-| `DB_HOST` | Yes locally | PostgreSQL host. | `localhost` |
-| `DB_PORT` | No | PostgreSQL port. | `5432` |
-| `DB_NAME` | No | PostgreSQL database name. | `countries` |
-| `DATABASE_URL` | Deploy alternative | Full PostgreSQL connection string. Takes precedence over `DB_*`. | `postgres://user:pass@host:5432/db` |
-| `COUNTRIES_API_URL` | No | Rest Countries seed endpoint. | `https://restcountries.com/v3.1/all` |
+| `PORT` | No | Puerto donde corre la API. | `3001` |
+| `NODE_ENV` | No | Entorno de ejecución. | `development` |
+| `CLIENT_URL` | Sí en deploy | Origen del frontend habilitado por CORS. | `http://localhost:3000` |
+| `DB_USER` | Sí en local | Usuario de PostgreSQL. | `postgres` |
+| `DB_PASSWORD` | Sí en local | Contraseña de PostgreSQL. | `postgres` |
+| `DB_HOST` | Sí en local | Host de PostgreSQL. | `localhost` |
+| `DB_PORT` | No | Puerto de PostgreSQL. | `5432` |
+| `DB_NAME` | No | Nombre de la base de datos. | `countries` |
+| `DATABASE_URL` | Alternativa en deploy | Cadena completa de conexión a PostgreSQL. Tiene prioridad sobre `DB_*`. | `postgres://user:pass@host:5432/db` |
+| `COUNTRIES_API_URL` | No | Endpoint utilizado para el seed desde Rest Countries. | `https://restcountries.com/v3.1/all` |
 
 ### Frontend (`client/.env`)
 
-Create a local file from the example:
+Crear un archivo local a partir del ejemplo:
 
 ```bash
 cd client
 cp .env.example .env
 ```
 
-| Variable | Required | Description | Example |
+| Variable | Obligatoria | Descripción | Ejemplo |
 | --- | --- | --- | --- |
-| `REACT_APP_API_URL` | Yes for deploy | Base URL of the backend API without a trailing slash. | `http://localhost:3001` |
+| `REACT_APP_API_URL` | Sí en deploy | URL base del backend sin barra final. | `http://localhost:3001` |
 
-> Create React App only exposes variables prefixed with `REACT_APP_`.
+> Create React App solo expone variables que empiezan con `REACT_APP_`.
 
-## Installation
+## Instalación
 
-### Prerequisites
+### Requisitos previos
 
-- Node.js and npm
+- Node.js y npm
 - PostgreSQL
-- A PostgreSQL database named `countries` for local development
+- Una base de datos PostgreSQL llamada `countries` para desarrollo local
 
-### 1. Clone the repository
+### 1. Clonar el repositorio
 
 ```bash
-git clone <your-repository-url>
+git clone <url-del-repositorio>
 cd PI-Countries
 ```
 
-### 2. Install backend dependencies
+### 2. Instalar dependencias del backend
 
 ```bash
 cd api
@@ -140,9 +140,9 @@ npm install
 cp .env.example .env
 ```
 
-Update `api/.env` with your local PostgreSQL credentials.
+Actualizar `api/.env` con las credenciales locales de PostgreSQL.
 
-### 3. Install frontend dependencies
+### 3. Instalar dependencias del frontend
 
 ```bash
 cd ../client
@@ -150,78 +150,80 @@ npm install
 cp .env.example .env
 ```
 
-Update `client/.env` if your API does not run on `http://localhost:3001`.
+Actualizar `client/.env` si la API no corre en `http://localhost:3001`.
 
-## Running locally
+## Ejecución local
 
-Start the backend:
+Iniciar el backend:
 
 ```bash
 cd api
 npm run dev
 ```
 
-Start the frontend in another terminal:
+En otra terminal, iniciar el frontend:
 
 ```bash
 cd client
 npm start
 ```
 
-Open `http://localhost:3000`.
+Abrir `http://localhost:3000`.
 
-On first backend startup, countries are loaded from Rest Countries if the `countries` table is empty. Existing data is preserved on restart.
+En el primer inicio del backend, si la tabla `countries` está vacía, los países se cargan desde Rest Countries. Los datos existentes se conservan al reiniciar.
 
-## Available scripts
+## Scripts disponibles
 
 ### Backend (`api`)
 
-| Script | Description |
+| Script | Descripción |
 | --- | --- |
-| `npm start` | Starts the API with `node index.js` for production-like environments. |
-| `npm run dev` | Starts the API with Nodemon for local development. |
-| `npm test` | Runs backend tests once. |
-| `npm run test:watch` | Runs backend tests in watch mode. |
+| `npm start` | Inicia la API con `node index.js`, útil para entornos tipo producción. |
+| `npm run dev` | Inicia la API con Nodemon para desarrollo local. |
+| `npm test` | Ejecuta una vez los tests del backend. |
+| `npm run test:watch` | Ejecuta los tests del backend en modo observación. |
 
 ### Frontend (`client`)
 
-| Script | Description |
+| Script | Descripción |
 | --- | --- |
-| `npm start` | Starts the CRA development server. |
-| `npm run build` | Creates a production build. |
-| `npm test -- --watchAll=false` | Runs frontend tests once. |
-| `npm test` | Runs frontend tests in interactive/watch mode. |
+| `npm start` | Inicia el servidor de desarrollo de Create React App. |
+| `npm run build` | Genera una build de producción. |
+| `npm test -- --watchAll=false` | Ejecuta una vez los tests del frontend. |
+| `npm test` | Ejecuta los tests del frontend en modo interactivo/observación. |
 
-## API endpoints
+## Endpoints de la API
 
-Base URL in local development: `http://localhost:3001`
+URL base en desarrollo local: `http://localhost:3001`
 
-### Countries
+### Países
 
-| Method | Endpoint | Description |
+| Método | Endpoint | Descripción |
 | --- | --- | --- |
-| `GET` | `/countries` | Returns all countries with associated activities. |
-| `GET` | `/countries?name=arg` | Returns countries matching a partial, case-insensitive name search. |
-| `GET` | `/countries/:id` | Returns one country by 3-letter country code and its activities. |
+| `GET` | `/countries` | Devuelve todos los países con sus actividades asociadas. |
+| `GET` | `/countries?name=arg` | Devuelve países cuyo nombre coincide parcialmente, sin distinguir mayúsculas/minúsculas. |
+| `GET` | `/countries/:id` | Devuelve un país por código de 3 letras y sus actividades. |
 
-### Activities
+### Actividades
 
-| Method | Endpoint | Description |
+| Método | Endpoint | Descripción |
 | --- | --- | --- |
-| `GET` | `/activities` | Returns activities with associated country IDs and minimal country details. |
-| `POST` | `/activities` | Creates an activity and associates it with countries by ID. |
+| `GET` | `/activities` | Devuelve actividades con IDs de países asociados y datos mínimos de cada país. |
+| `POST` | `/activities` | Crea una actividad y la asocia con países por ID. |
 
-Example `POST /activities` body:
+Ejemplo de body para `POST /activities`:
 
 ```json
 {
-  "name": "Hiking",
+  "name": "Senderismo",
   "difficulty": 3,
   "duration": 4,
   "season": "Summer",
   "countries": ["ARG", "BRA"]
 }
 ```
+
+> Nota: el backend mantiene las temporadas en inglés (`Summer`, `Autumn`, `Winter`, `Spring`) para conservar compatibilidad interna. La interfaz las muestra en español: Verano, Otoño, Invierno y Primavera.
 
 ## Testing
 
@@ -239,58 +241,58 @@ cd client
 npm test -- --watchAll=false
 ```
 
-Build check:
+Chequeo de build:
 
 ```bash
 cd client
 npm run build
 ```
 
-## Deployment preparation
+## Deploy
 
-The app is ready for separate frontend/backend deployment.
+La aplicación está preparada para desplegar frontend y backend por separado.
 
-### Backend deployment checklist
+### Checklist para backend
 
-- Set `NODE_ENV=production`.
-- Set `PORT` if required by your hosting provider.
-- Set `DATABASE_URL` or all `DB_*` variables.
-- Set `CLIENT_URL` to the deployed frontend URL.
-- Ensure the PostgreSQL database exists and is reachable.
-- Run `npm start` from the `api` folder.
+- Definir `NODE_ENV=production`.
+- Definir `PORT` si el proveedor lo requiere.
+- Configurar `DATABASE_URL` o todas las variables `DB_*`.
+- Configurar `CLIENT_URL` con la URL del frontend desplegado.
+- Verificar que la base PostgreSQL exista y sea accesible.
+- Ejecutar `npm start` desde la carpeta `api`.
 
-### Frontend deployment checklist
+### Checklist para frontend
 
-- Set `REACT_APP_API_URL` to the deployed backend URL.
-- Run `npm run build` from the `client` folder.
-- Deploy the generated `client/build` folder.
+- Definir `REACT_APP_API_URL` con la URL del backend desplegado.
+- Ejecutar `npm run build` desde la carpeta `client`.
+- Desplegar la carpeta generada `client/build`.
 
-## Responsive support
+## Soporte responsive
 
-The UI includes responsive layouts for:
+La interfaz contempla:
 
-- Desktop country grid and filters.
-- Tablet filter wrapping.
-- Single-column mobile Home, Details and Create Activity views.
-- Mobile-friendly search and form controls.
+- Grilla de países y filtros optimizados para desktop.
+- Ajuste de filtros en tablet para evitar desbordes.
+- Vista de una columna en mobile para Home, Detalle y Crear actividad.
+- Buscador, formularios y paginado usables en pantallas pequeñas.
 
-## Future improvements
+## Mejoras futuras
 
-- Add real screenshots/GIFs under `docs/screenshots`.
-- Add end-to-end tests with Cypress or Playwright.
-- Add server-side pagination if the dataset grows.
-- Add auth for admin-only activity management.
-- Add image optimization for static assets.
-- Improve internationalization if the app targets Spanish and English users.
-- Add a production-ready migration workflow instead of relying only on `sequelize.sync()`.
+- Agregar capturas o GIFs reales en `docs/screenshots`.
+- Sumar tests end-to-end con Cypress o Playwright.
+- Agregar paginación server-side si el dataset crece.
+- Incorporar autenticación para administrar actividades.
+- Optimizar imágenes estáticas.
+- Implementar internacionalización formal si la app apunta a múltiples idiomas.
+- Reemplazar `sequelize.sync()` por un flujo de migraciones listo para producción.
 
-## Author
+## Autor y contacto
 
 **Eduardo Damián Gómez**
 
 - GitHub: [Eduman8](https://github.com/Eduman8)
 - LinkedIn: [Eduardo Damián Gómez](https://www.linkedin.com/in/eduardo-dami%C3%A1n-g%C3%B3mez-89a432217/)
 
-## Portfolio status
+## Estado para portfolio
 
-This project is suitable as a junior frontend/fullstack portfolio piece after adding screenshots and deployment URLs. It demonstrates full-stack CRUD-style flow, API integration, relational data modeling, Redux state management, responsive UI work and basic testing.
+El proyecto es apto como pieza de portfolio junior frontend/fullstack después de agregar capturas y URLs de deploy. Demuestra flujo full-stack, integración con API externa, modelado relacional, manejo de estado con Redux, diseño responsive y pruebas básicas.

@@ -24,11 +24,11 @@ export default function SearchBar({ onSearch }) {
                 <input
                     type='text'
                     className="search-input"
-                    placeholder="Country..."
+                    placeholder="Buscar país..."
                     value={country}
                     onChange={e => setCountry(e.target.value)}
                 />
-                <input className="btn-search" type='submit' value='Search' />
+                <input className="btn-search" type='submit' value='Buscar' />
             </form>
             {error && typeof error === 'string' ? <p className='text-error'>{error}</p> : null}
         </>

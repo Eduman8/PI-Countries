@@ -103,7 +103,7 @@ function reducer(state = initialState, action) {
             }
             return {
                 ...state,
-                error: action.results?.length === 0 ? 'Country not found' : '',
+                error: action.results?.length === 0 ? 'País no encontrado' : '',
                 loading: false,
                 filters: nextFilters,
                 allCountries: state.allCountries.length ? state.allCountries : action.results || [],

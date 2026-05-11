@@ -25,8 +25,8 @@ const NavBar = ({ onSearch }) => {
                         <SearchBar onSearch={onSearch} />
                     </div>
                     <div className='links'>
-                        <Link className="ul-nav-home" to='/countries' onClick={() => HandleDispatch()}><BsHouseFill />Home</Link>
-                        <Link className="ul-nav-act" to='/activities'><RiAddLine />Create Activity</Link>
+                        <Link className="ul-nav-home" to='/countries' onClick={() => HandleDispatch()}><BsHouseFill />Inicio</Link>
+                        <Link className="ul-nav-act" to='/activities'><RiAddLine />Crear actividad</Link>
                     </div>
                 </div>
             </nav>
