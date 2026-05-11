@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom'
 import { getActivities, getCountries, postActivity } from '../../Actions/Index'
+import { translateSeason } from '../../utils/translations'
 import './styles.modules.css'
 import Swal from 'sweetalert2'
 import { BsHouseFill } from 'react-icons/bs'
@@ -9,19 +10,19 @@ import { BsHouseFill } from 'react-icons/bs'
 function valida(input) {
     let errors = {}
     if (!input.name.trim()) {
-        errors.name = "Name required"
+        errors.name = "El nombre es obligatorio"
     }
     if (!input.season) {
-        errors.season = "Season required"
+        errors.season = "La temporada es obligatoria"
     }
     if (!input.difficulty) {
-        errors.difficulty = "Difficulty required"
+        errors.difficulty = "La dificultad es obligatoria"
     }
     if (!input.duration) {
-        errors.duration = "Duration required"
+        errors.duration = "La duración es obligatoria"
     }
     if (!input.countries.length) {
-        errors.countries = "At least one country is required"
+        errors.countries = "Seleccioná al menos un país"
     }
     return errors;
 }
@@ -81,7 +82,7 @@ function AddActivity() {
         setErrors(validationErrors)
 
         if (Object.keys(validationErrors).length) {
-            Swal.fire('Oops...', 'Please complete all required fields.', 'error')
+            Swal.fire('Faltan datos', 'Completá todos los campos obligatorios.', 'error')
             return
         }
 
@@ -98,13 +99,13 @@ function AddActivity() {
             })
             setErrors({})
             Swal.fire(
-                'Good job!',
-                'Activity created successfully!',
+                '¡Listo!',
+                'La actividad se creó correctamente.',
                 'success'
             )
             history.push('/countries')
         } catch (error) {
-            Swal.fire('Oops...', error.message, 'error')
+            Swal.fire('No se pudo crear la actividad', error.message, 'error')
         } finally {
             setSubmitting(false)
         }
@@ -118,33 +119,33 @@ function AddActivity() {
         <div className='background-image'>
             <div className="form">
                 <div className="container">
-                    <Link className="ul-nav-home" to='/countries' ><BsHouseFill />Home</Link>
-                    <p className='form-kicker'>Plan a trip</p>
-                    <h2>Create activity</h2>
-                    <p className='form-description'>Add a tourist activity and connect it with one or more countries.</p>
+                    <Link className="ul-nav-home" to='/countries' ><BsHouseFill />Inicio</Link>
+                    <p className='form-kicker'>Planificá un viaje</p>
+                    <h2>Crear actividad</h2>
+                    <p className='form-description'>Agregá una actividad turística y asociála con uno o más países.</p>
                 </div>
                 <form onSubmit={handleSubmit}>
                     <div className="act">
-                        <label>Activity name</label>
-                        <input className='select' type='text' value={input.name} name='name' onChange={handleChange} placeholder='Activity name' required />
+                        <label>Nombre de la actividad</label>
+                        <input className='select' type='text' value={input.name} name='name' onChange={handleChange} placeholder='Nombre de la actividad' required />
                         {errors.name && (
                             <p className="error">{errors.name}</p>
                         )}
                     </div>
                     <div className="season">
-                        <label>Season</label>
+                        <label>Temporada</label>
                         <select className='select' name='season' value={input.season} onChange={handleChange} required>
-                            <option value='' hidden>Select season</option>
+                            <option value='' hidden>Seleccioná una temporada</option>
                             {season.map(e => (
-                                <option value={e} name='season' key={e}>{e}</option>
+                                <option value={e} name='season' key={e}>{translateSeason(e)}</option>
                             ))}
                         </select>
                         {errors.season && <p className="error">{errors.season}</p>}
                     </div>
                     <div className="difficulty">
-                        <label>Difficulty</label>
+                        <label>Dificultad</label>
                         <select className='select' name='difficulty' value={input.difficulty} onChange={handleChange} required>
-                            <option value='' hidden>Choose an option</option>
+                            <option value='' hidden>Elegí una opción</option>
                             {difficulty.map(e => (
                                 <option value={e} name='difficulty' key={e}>{e}</option>
                             ))}
@@ -152,19 +153,19 @@ function AddActivity() {
                         {errors.difficulty && <p className="error">{errors.difficulty}</p>}
                     </div>
                     <div className="duration">
-                        <label>Duration</label>
+                        <label>Duración</label>
                         <select className='select' name='duration' value={input.duration} onChange={handleChange} required>
-                            <option value='' hidden> Choose an option</option>
+                            <option value='' hidden>Elegí una opción</option>
                             {duration.map(e => (
-                                <option value={e} name='duration' key={e}>{e}</option>
+                                <option value={e} name='duration' key={e}>{e} h</option>
                             ))}
                         </select>
                         {errors.duration && <p className="error">{errors.duration}</p>}
                     </div>
                     <div className="country">
-                        <label>Countries</label>
+                        <label>Países</label>
                         <select className='select' value='' onChange={handleSelect}>
-                            <option value='' hidden>Select a country</option>
+                            <option value='' hidden>Seleccioná un país</option>
                             {countries.map(e => (
                                 <option value={e.id} name='countries' key={e.id}>{e.name}</option>
                             ))}
@@ -172,15 +173,16 @@ function AddActivity() {
                         {errors.countries && <p className="error">{errors.countries}</p>}
                     </div>
                     <div>
+                        <p className='selected-title'>Países seleccionados</p>
                         <li className="countries-select">
                             {input.countries.map(i =>
                                 <div key={i}>
                                     <span>{i}</span>
-                                    <button aria-label={`Remove ${i}`} title={`Remove ${i}`} className='close-btn' onClick={() => handleDelete(i)} type='button'>X</button>
+                                    <button aria-label={`Quitar ${i}`} title={`Quitar ${i}`} className='close-btn' onClick={() => handleDelete(i)} type='button'>X</button>
                                 </div>)}
                         </li>
                     </div>
-                    <button className='button1' type="submit" disabled={submitting}>{submitting ? 'Saving...' : 'Create activity'}</button>
+                    <button className='button1' type="submit" disabled={submitting}>{submitting ? 'Guardando...' : 'Crear actividad'}</button>
                 </form>
             </div>
         </div>

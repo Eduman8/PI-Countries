@@ -17,7 +17,7 @@ import {
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001'
 
 function getErrorMessage(error) {
-    return error.response?.data?.error || error.message || 'Unexpected error'
+    return error.response?.data?.error || error.message || 'Ocurrió un error inesperado'
 }
 
 export function getCountries() {

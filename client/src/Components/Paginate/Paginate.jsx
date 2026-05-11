@@ -9,7 +9,7 @@ function Paginate({ countriesPerPage, allCountries, paginado, currentPage }) {
     }
 
     return (
-        <nav className='nav' aria-label='Pagination'>
+        <nav className='nav' aria-label='Paginación'>
             <ul className="ul">
                 {pageNumber && pageNumber.map((number) => {
                     return (

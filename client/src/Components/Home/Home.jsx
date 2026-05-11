@@ -69,35 +69,35 @@ function Home() {
                     < NavBar onSearch={() => setCurrentPage(1)} />
                 </div>
                 <section className='home-hero'>
-                    <p className='home-kicker'>Explore the world</p>
-                    <h1>Countries, flags and travel activities</h1>
-                    <p className='home-description'>Search, filter and organize countries with a clean portfolio-ready interface.</p>
+                    <p className='home-kicker'>Explorá el mundo</p>
+                    <h1>Países, banderas y actividades turísticas</h1>
+                    <p className='home-description'>Buscá, filtrá y organizá países con una interfaz clara y lista para portfolio.</p>
                 </section>
 
-                <div className='Filtros' aria-label='Country filters'>
+                <div className='Filtros' aria-label='Filtros de países'>
                     <div className='Filtro'>
                         <select className='selectors' onChange={handleOrderPopulation}>
-                            <option value='Select'>Population</option>
-                            <option value='Min' key='Min'>Lowest population</option>
-                            <option value='Max' key='Max'>Highest population</option>
+                            <option value='Select'>Población</option>
+                            <option value='Min' key='Min'>Menor población</option>
+                            <option value='Max' key='Max'>Mayor población</option>
                         </select>
                     </div>
                     <div className='Filtro'>
                         <select className='selectors' onChange={handleContinents}>
-                            <option value='All' key='All'>All Continents</option>
-                            <option value='Africa' key='Africa'>Africa</option>
-                            <option value='Antarctica' key='Antarctica'>Antarctica</option>
+                            <option value='All' key='All'>Todos los continentes</option>
+                            <option value='Africa' key='Africa'>África</option>
+                            <option value='Antarctica' key='Antarctica'>Antártida</option>
                             <option value='Asia' key='Asia'>Asia</option>
-                            <option value='Europe' key='Europe'>Europe</option>
-                            <option value='North America' key='North America'>North America</option>
-                            <option value='Oceania' key='Oceania'>Oceania</option>
-                            <option value='South America' key='South America'>South America</option>
+                            <option value='Europe' key='Europe'>Europa</option>
+                            <option value='North America' key='North America'>América del Norte</option>
+                            <option value='Oceania' key='Oceania'>Oceanía</option>
+                            <option value='South America' key='South America'>América del Sur</option>
                         </select>
                     </div>
                     <div className='Filtro'>
                         <select className='selectors' onChange={handleActivity}>
-                            <option value='Select'>Activities</option>
-                            <option value='All'>All Activities</option>
+                            <option value='Select'>Actividades</option>
+                            <option value='All'>Todas las actividades</option>
                             {activities.map(e => {
                                 return (
                                     <option value={e.name} key={e.id} >{e.name}</option>
@@ -108,23 +108,23 @@ function Home() {
                     </div>
                     <div className='Filtro'>
                         <select className='selectors' onChange={handleOrder}>
-                            <option value="Select">Alphabet</option>
+                            <option value="Select">Orden alfabético</option>
                             <option value="Asc" key="Asc">A-Z</option>
                             <option value="Desc" key="Desc">Z-A</option>
                         </select>
                     </div>
                     <div className='Filtro'>
                         <button onClick={e => { handleClick(e) }} className='selectors'>
-                            Clear filters
+                            Limpiar filtros
                         </button>
                     </div>
                 </div>
 
                 {error ? <p className='text-error'>{error}</p> : null}
-                {loading ? <div className='loading-state'>Loading countries...</div> : null}
+                {loading ? <div className='loading-state'>Cargando países...</div> : null}
 
                 <div className='boxing'>
-                    {!loading && allCountries?.length === 0 ? <div className='empty-state'>No countries found. Try changing your search or filters.</div> : null}
+                    {!loading && allCountries?.length === 0 ? <div className='empty-state'>No se encontraron países. Probá cambiando la búsqueda o los filtros.</div> : null}
                     {allCountries?.map((e) => {
                         return (
                             <div className='carta' key={e.id}>
