@@ -1,57 +1,155 @@
 .fondo {
-    background-image: url(..//Assets/background.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
+    min-height: 100vh;
+    padding-bottom: 48px;
+    background:
+        linear-gradient(180deg, rgba(248, 250, 252, 0.94), rgba(241, 245, 249, 0.98)),
+        url(..//Assets/background.jpg) center/cover fixed;
+}
+
+.nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+}
+
+.home-hero {
+    width: min(1120px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 54px 0 26px;
+    text-align: left;
+}
+
+.home-kicker {
+    margin: 0 0 10px;
+    color: var(--color-primary);
+    font-size: 0.86rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.home-hero h1 {
+    max-width: 760px;
+    margin: 0;
+    color: var(--color-text);
+    font-size: clamp(2.1rem, 6vw, 4.6rem);
+    line-height: 0.98;
+    letter-spacing: -0.06em;
+}
+
+.home-description {
+    max-width: 620px;
+    margin: 18px 0 0;
+    color: var(--color-muted);
+    font-size: clamp(1rem, 2vw, 1.18rem);
+    line-height: 1.7;
 }
 
 .Filtros {
-    width: 105%;
-    height: 70%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(150px, 1fr));
+    gap: 14px;
+    width: min(1120px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid rgba(219, 227, 239, 0.9);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    backdrop-filter: blur(14px);
+}
+
+.Filtro {
+    min-width: 0;
 }
 
 .selectors {
-    border-radius: 8px;
-    font-size: 15px;
-    background-color: #2c1a5fa3;
-    font-style: italic;
-    color: antiquewhite;
-    font-weight: 600;
+    width: 100%;
+    min-height: 44px;
+    padding: 0 14px;
+    color: var(--color-text);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
     cursor: pointer;
+    font-size: 0.94rem;
+    font-weight: 700;
+    outline: none;
+    transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+button.selectors {
+    color: #ffffff;
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.selectors:hover,
+.selectors:focus-visible {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+button.selectors:hover,
+button.selectors:focus-visible {
+    background: var(--color-primary-dark);
+    transform: translateY(-1px);
+}
+
+.boxing {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 24px;
+    width: min(1120px, calc(100% - 32px));
+    margin: 34px auto 0;
+    align-items: stretch;
 }
 
 .carta {
-    display: grid;
+    min-height: 310px;
+}
+
+.text-error,
+.loading-state,
+.empty-state {
+    width: min(1120px, calc(100% - 32px));
+    margin: 18px auto 0;
+    padding: 16px 18px;
+    border-radius: var(--radius-md);
+    font-weight: 700;
     text-align: center;
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    padding: 35px;
-    width: 300px;
-    height: 300px;
-    background-color: rgba(0, 0, 0, 0.233);
-    font-style: italic;
 }
 
-.carta:hover {
-    background-color: #31194a33;
+.text-error {
+    color: var(--color-danger);
+    background: #fef2f2;
+    border: 1px solid #fecaca;
 }
 
-.carta img {
-    width: 200px;
-    height: 150px;
+.loading-state,
+.empty-state {
+    color: var(--color-muted);
+    background: rgba(255, 255, 255, 0.86);
+    border: 1px dashed var(--color-border);
 }
 
+@media (max-width: 900px) {
+    .Filtros {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
 
+@media (max-width: 560px) {
+    .home-hero {
+        padding-top: 34px;
+    }
 
-.boxing {
-    margin-top: 70px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    grid-column-gap: 30px;
-    grid-row-gap: 100px;
-    justify-items: center;
+    .Filtros {
+        grid-template-columns: 1fr;
+        border-radius: var(--radius-md);
+    }
+
+    .boxing {
+        grid-template-columns: 1fr;
+    }
 }

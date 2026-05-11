@@ -1,74 +1,74 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
-import { getDetail, getCountries } from '../../Actions/Index'
-import styles from './styles.modules.css'
+import { clearFilters, getDetail, getCountries } from '../../Actions/Index'
+import './styles.modules.css'
 import Loading from '../Assets/Loading.gif'
 import { Link } from 'react-router-dom'
 import { BsHouseFill } from 'react-icons/bs'
 
-
 function Details() {
     let { id } = useParams();
     const dispatch = useDispatch()
-    const details = useSelector(state => state.details)
+    const details = useSelector(state => state.detail)
     const loading = useSelector(state => state.loading)
-    const allActivities = useSelector(state => state.allActivities)
-
+    const error = useSelector(state => state.error)
+    const activities = details?.activities || []
 
     const HandleDispatch = () => {
+        dispatch(clearFilters())
         dispatch(getCountries())
     }
 
     useEffect(() => {
         dispatch(getDetail(id))
-    }, [dispatch])
-
+    }, [dispatch, id])
 
     return (
-        <div className='background'>
-            <div className='card'>
-                <div className='links'>
-                    <Link className="ul-nav-home" to='/countries' onClick={() => HandleDispatch()}><BsHouseFill />Home</Link>
+        <main className='details-page'>
+            <section className='details-card'>
+                <div className='details-actions'>
+                    <Link className="details-home-link" to='/countries' onClick={() => HandleDispatch()}><BsHouseFill /> Home</Link>
                 </div>
-                {loading ? <img src={Loading} alt='img-loading' /> : details !== null ?
+                {loading ? <div className='details-loading'><img src={Loading} alt='Loading country details' /><span>Loading details...</span></div> : details !== null ?
                     <div>
-                        <div className={styles.flag}>
-                            <h2>{details.name}</h2>
-                            <img src={details.image} alt={details.name} className={styles.imagen} />
-                        </div>
-                        <div className='details'>
-                            <div  >
-                                <h3>Details:</h3>
-                                <p>Code: {details.id}</p>
-                                <p>Continent: {details.continent}</p>
-                                <p>Capital: {details.capital}</p>
-                                <p>Population: {details.population}</p>
-                                <p>Area: {details.area}Km</p>
-                                <p>Subregion: {details.subregion}</p>
+                        <div className='details-hero'>
+                            <div>
+                                <p className='details-kicker'>{details.continent}</p>
+                                <h1>{details.name}</h1>
+                                <p className='details-code'>Country code: {details.id}</p>
                             </div>
-                            <div >
-                                <h3>Activities:</h3>
-                                {allActivities?.length > 0 ? allActivities?.map(e => {
-                                    if (e.countries.includes(details.id)) {
-                                        return (
-                                            <div key={e.id}>
-                                                <p>Name: {e.name}</p>
-                                                <p>Difficulty: {e.difficulty}</p>
-                                                <p>Duration: {e.duration}</p>
-                                                <p>Season: {e.season}</p>
-                                            </div>
-                                            
-                                        )
-                                    }
-                                })
-                                    : <p>Without activities</p>}
+                            <img src={details.image} alt={`${details.name} flag`} className='details-flag' />
+                        </div>
+                        <div className='details-grid'>
+                            <div className='details-panel'>
+                                <h2>Country details</h2>
+                                <dl className='stats-list'>
+                                    <div><dt>Capital</dt><dd>{details.capital}</dd></div>
+                                    <div><dt>Population</dt><dd>{details.population}</dd></div>
+                                    <div><dt>Area</dt><dd>{details.area} km²</dd></div>
+                                    <div><dt>Subregion</dt><dd>{details.subregion || 'Not available'}</dd></div>
+                                </dl>
+                            </div>
+                            <div className='details-panel'>
+                                <h2>Activities</h2>
+                                {activities.length > 0 ? <div className='activity-list'>{activities.map(e => {
+                                    return (
+                                        <article className='activity-item' key={e.id}>
+                                            <h3>{e.name}</h3>
+                                            <p>Difficulty: {e.difficulty}</p>
+                                            <p>Duration: {e.duration} h</p>
+                                            <p>Season: {e.season}</p>
+                                        </article>
+                                    )
+                                })}</div>
+                                    : <p className='empty-copy'>No activities registered yet.</p>}
                             </div>
                         </div>
-                    </div> : <p>Country not found</p>
+                    </div> : <p className='empty-copy'>{error || 'Country not found'}</p>
                 }
-            </div>
-        </div>
+            </section>
+        </main>
     )
 }
 

@@ -1,46 +1,53 @@
-//                       _oo0oo_
-//                      o8888888o
-//                      88" . "88
-//                      (| -_- |)
-//                      0\  =  /0
-//                    ___/`---'\___
-//                  .' \\|     |// '.
-//                 / \\|||  :  |||// \
-//                / _||||| -:- |||||- \
-//               |   | \\\  -  /// |   |
-//               | \_|  ''\---/''  |_/ |
-//               \  .-\__  '-'  ___/-. /
-//             ___'. .'  /--.--\  `. .'___
-//          ."" '<  `.___\_<|>_/___.' >' "".
-//         | | :  `- \`.;`\ _ /`;.`/ - ` : | |
-//         \  \ `_.   \_ __\ /__ _/   .-` /  /
-//     =====`-.____`.___ \_____/___.-`___.-'=====
-//                       `=---='
-//     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+const axios = require('axios');
 const server = require('./src/app.js');
 const { conn, Country } = require('./src/db.js');
-const axios = require('axios')
 
-// Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
-  server.listen(3001, async () => {
-    const allCountries = Country.findAll();
-    if (!allCountries.length) {
-      const apiCountriesResponse = await axios.get('https://restcountries.com/v3/all');
-      var apiCountries = apiCountriesResponse.data.map((e) => {
-        return {
-          id: e.cca3,
-          name: e.name.common,
-          image: e.flags[0],
-          continent: e.continents[0],
-          capital: e.capital ? e.capital[0] : 'Not found',
-          subregion: e.subregion,
-          area: e.area,
-          population: e.population
-        }
-      })
-      await Country.bulkCreate(apiCountries);
-    }
-    console.log('%s listening at 3001'); // eslint-disable-line no-console
-  });
-});
+const PORT = process.env.PORT || 3001;
+const COUNTRIES_API_URL = process.env.COUNTRIES_API_URL || 'https://restcountries.com/v3.1/all';
+
+function getFlagUrl(flags) {
+  if (!flags) return 'Not found';
+  if (typeof flags === 'string') return flags;
+  return flags.svg || flags.png || 'Not found';
+}
+
+async function seedCountries() {
+  const countriesCount = await Country.count();
+
+  if (countriesCount > 0) {
+    console.log(`Countries seed skipped: ${countriesCount} countries already loaded.`);
+    return;
+  }
+
+  const apiCountriesResponse = await axios.get(COUNTRIES_API_URL);
+  const apiCountries = apiCountriesResponse.data.map((country) => ({
+    id: country.cca3,
+    name: country.name.common,
+    image: getFlagUrl(country.flags),
+    continent: country.continents ? country.continents[0] : 'Not found',
+    capital: country.capital ? country.capital[0] : 'Not found',
+    subregion: country.subregion,
+    area: country.area,
+    population: country.population,
+  }));
+
+  await Country.bulkCreate(apiCountries);
+  console.log(`Countries seed completed: ${apiCountries.length} countries loaded.`);
+}
+
+async function startServer() {
+  try {
+    await conn.authenticate();
+    await conn.sync();
+    await seedCountries();
+
+    server.listen(PORT, () => {
+      console.log(`API listening at ${PORT}`);
+    });
+  } catch (error) {
+    console.error('Unable to start API server:', error);
+    process.exit(1);
+  }
+}
+
+startServer();
