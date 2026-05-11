@@ -9,8 +9,8 @@ El proyecto nació como una práctica individual de bootcamp y fue estabilizado 
 > Capturas sugeridas antes de publicar el portfolio:
 >
 > - `"C:\Users\eduma\Downloads\Screenshot 2026-05-11 at 19-19-52 Henry Countries.png"` — pantalla principal con filtros y cards de países.
-> - `"C:\Users\eduma\Downloads\Screenshot 2026-05-11 at 19-20-00 Henry Countries.png"` — detalle de país con actividades asociadas.
-> - `"C:\Users\eduma\Downloads\Screenshot 2026-05-11 at 19-20-14 Henry Countries.png"` — formulario responsive para crear actividades.
+> - `https://res.cloudinary.com/dbkfkpjjl/image/upload/v1778542720/Screenshot_2026-05-11_at_19-20-00_Henry_Countries_lnk18w.png` — detalle de país con actividades asociadas.
+> - `https://res.cloudinary.com/dbkfkpjjl/image/upload/v1778542732/Screenshot_2026-05-11_at_19-20-14_Henry_Countries_xn5q9b.png` — formulario responsive para crear actividades.
 >
 > Podés generarlas manualmente después de levantar la aplicación en local.
 
