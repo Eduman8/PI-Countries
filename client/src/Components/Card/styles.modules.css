@@ -1,5 +1,6 @@
 .country-card-link {
     display: block;
+    width: 100%;
     height: 100%;
     min-width: 0;
 }
@@ -7,9 +8,10 @@
 .country-card {
     display: flex;
     flex-direction: column;
+    width: 100%;
     height: 100%;
+    min-width: 0;
     min-height: 326px;
-    overflow: hidden;
     background: rgba(255, 255, 255, 0.94);
     border: 1px solid rgba(219, 227, 239, 0.9);
     border-radius: var(--radius-md);
@@ -26,10 +28,13 @@
 
 .country-card__flag-wrap {
     display: flex;
+    width: 100%;
+    min-width: 0;
     align-items: center;
     justify-content: center;
     height: 164px;
     padding: 18px;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
     background: linear-gradient(135deg, #e0f2fe, #eef2ff);
 }
 
@@ -46,8 +51,9 @@
     display: flex;
     flex: 1;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
     gap: 8px;
+    width: 100%;
     min-width: 0;
     min-height: 162px;
     padding: 18px 20px 20px;
@@ -55,6 +61,8 @@
 }
 
 .country-card__eyebrow {
+    width: 100%;
+    max-width: 100%;
     margin: 0;
     color: var(--color-primary);
     font-size: 0.76rem;
@@ -65,17 +73,24 @@
 }
 
 .country-card__title {
-    display: -webkit-box;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
     margin: 0;
     color: var(--color-text);
     font-size: clamp(1.04rem, 1.05vw + 0.72rem, 1.28rem);
     font-weight: 800;
     letter-spacing: -0.025em;
     line-height: 1.12;
-    overflow: hidden;
     overflow-wrap: break-word;
     text-wrap: balance;
+    white-space: normal;
     word-break: normal;
+}
+
+.country-card__title--clamp {
+    display: -webkit-box;
+    overflow: hidden;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
 }
