@@ -107,7 +107,7 @@ button.selectors:focus-visible {
 
 .carta {
     min-width: 0;
-    min-height: 342px;
+    min-height: 326px;
 }
 
 .text-error,
@@ -137,6 +137,10 @@ button.selectors:focus-visible {
 @media (max-width: 900px) {
     .Filtros {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .boxing {
+        grid-template-columns: repeat(2, minmax(260px, 1fr));
     }
 }
 
