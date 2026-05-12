@@ -20,16 +20,23 @@ if (!DATABASE_URL && missingRecommendedVars.length) {
 
 const sequelize = DATABASE_URL
   ? new Sequelize(DATABASE_URL, {
-      logging: false,
-      native: false,
-    })
+    dialect: 'postgres',
+    logging: false,
+    native: false,
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    },
+  })
   : new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
-      host: DB_HOST,
-      port: DB_PORT,
-      dialect: 'postgres',
-      logging: false,
-      native: false,
-    });
+    host: DB_HOST,
+    port: DB_PORT,
+    dialect: 'postgres',
+    logging: false,
+    native: false,
+  });
 const basename = path.basename(__filename);
 
 const modelDefiners = [];

@@ -1,9 +1,12 @@
-const axios = require('axios');
-const server = require('./src/app.js');
-const { conn, Country } = require('./src/db.js');
+import axios from 'axios';
+import server from './src/app.js';
+import db from './src/db.js';
+
+const { conn, Country } = db;
 
 const PORT = process.env.PORT || 3001;
-const COUNTRIES_API_URL = process.env.COUNTRIES_API_URL || 'https://restcountries.com/v3.1/all';
+const COUNTRIES_API_URL =
+  'https://restcountries.com/v3.1/all?fields=name,cca3,flags,continents,capital,subregion,area,population';
 
 function getFlagUrl(flags) {
   if (!flags) return 'Not found';
@@ -19,20 +22,21 @@ async function seedCountries() {
     return;
   }
 
-  const apiCountriesResponse = await axios.get(COUNTRIES_API_URL);
-  const apiCountries = apiCountriesResponse.data.map((country) => ({
+  const response = await axios.get(COUNTRIES_API_URL);
+
+  const countries = response.data.map((country) => ({
     id: country.cca3,
-    name: country.name.common,
+    name: country.name?.common || 'Not found',
     image: getFlagUrl(country.flags),
-    continent: country.continents ? country.continents[0] : 'Not found',
-    capital: country.capital ? country.capital[0] : 'Not found',
-    subregion: country.subregion,
-    area: country.area,
-    population: country.population,
+    continent: country.continents?.[0] || 'Not found',
+    capital: country.capital?.[0] || 'Not found',
+    subregion: country.subregion || 'Not found',
+    area: country.area || 0,
+    population: country.population || 0,
   }));
 
-  await Country.bulkCreate(apiCountries);
-  console.log(`Countries seed completed: ${apiCountries.length} countries loaded.`);
+  await Country.bulkCreate(countries);
+  console.log(`Countries seed completed: ${countries.length} countries loaded.`);
 }
 
 async function startServer() {
