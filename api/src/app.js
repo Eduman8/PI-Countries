@@ -7,7 +7,12 @@ const routes = require('./routes/index.js');
 require('./db.js');
 
 const server = express();
-const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:3000';
+
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://localhost:3001',
+  process.env.CLIENT_URL,
+].filter(Boolean);
 
 server.name = 'API';
 
@@ -15,11 +20,23 @@ server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 server.use(bodyParser.json({ limit: '50mb' }));
 server.use(cookieParser());
 server.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
+
 server.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', CLIENT_URL);
+  const origin = req.headers.origin;
+
+  if (allowedOrigins.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+  }
+
+  res.header('Vary', 'Origin');
   res.header('Access-Control-Allow-Credentials', 'true');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(204);
+  }
+
   next();
 });
 
