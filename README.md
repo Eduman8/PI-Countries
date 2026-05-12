@@ -10,7 +10,7 @@ El proyecto nació como una práctica individual de bootcamp y fue estabilizado 
 
 ### Pantalla principal
 
-![Pantalla principal](https://res.cloudinary.com/dbkfkpjjl/image/upload/v1778542720/Screenshot_2026-05-11_at_19-19-52_Henry_Countries.png)
+![Pantalla principal](https://res.cloudinary.com/dbkfkpjjl/image/upload/v1778546417/Screenshot_2026-05-11_at_21-40-02_Henry_Countries_cq5lus.png)
 
 ### Detalle de país
 
