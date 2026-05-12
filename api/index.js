@@ -1,8 +1,6 @@
-import axios from 'axios';
-import server from './src/app.js';
-import db from './src/db.js';
-
-const { conn, Country } = db;
+const axios = require('axios');
+const server = require('./src/app.js');
+const { conn, Country } = require('./src/db.js');
 
 const PORT = process.env.PORT || 3001;
 const COUNTRIES_API_URL =
