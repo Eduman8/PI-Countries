@@ -24,46 +24,79 @@ El proyecto nació como una práctica individual de bootcamp y fue estabilizado 
 
 ### Frontend
 
-- React 17
-- Redux clásico + Redux Thunk
-- React Router DOM v5
-- Axios
-- Estilos por componente con CSS plano / convención tipo CSS Modules
-- SweetAlert2 para mensajes de feedback
-- Jest + React Testing Library
+PI Countries 🌎
 
-### Backend
+Full Stack web application developed during the Henry Bootcamp.
 
-- Node.js
-- Express
-- Sequelize
-- PostgreSQL
-- Axios para la carga inicial desde Rest Countries
-- Mocha, Chai y Supertest
+This application allows users to explore countries around the world, search and filter them by different criteria, and create tourist activities associated with countries.
 
-### API externa
+🚀 Live Demo
+<p align="center"> <a href="https://countries-nine-liard.vercel.app/" target="_blank"> <img src="https://img.shields.io/badge/LIVE_DEMO-Visit_Project-2563eb?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo"/> </a> <a href="https://github.com/Eduman8/PI-Countries" target="_blank"> <img src="https://img.shields.io/badge/GITHUB-Repository-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Repo"/> </a> </p>
+🛠️ Tech Stack
+Frontend
+React
+Redux
+CSS3
+Axios
+Backend
+Node.js
+Express
+Sequelize
+PostgreSQL
+Deployment
+Vercel
+Render
+Neon PostgreSQL
+✨ Features
+Search countries by name
+Filter by continent
+Sort alphabetically
+Sort by population
+Create tourist activities
+Associate activities with countries
+Responsive interface
+REST API integration
+PostgreSQL database persistence
+📸 Screenshots
+Home
 
-- [Rest Countries](https://restcountries.com/) para poblar inicialmente la base de datos de países.
+Country Detail
 
-## Funcionalidades principales
+Create Activity
 
-- Listado de países con bandera, nombre y continente.
-- Búsqueda de países por coincidencia parcial de nombre.
-- Filtro por continente.
-- Filtro por actividad turística asociada.
-- Orden alfabético y orden por población.
-- Grilla paginada de países.
-- Vista de detalle con capital, subregión, área, población y actividades.
-- Creación de actividades turísticas asociadas a múltiples países.
-- Interfaz responsive para desktop, tablet y mobile.
-- Estados básicos de carga, vacío y error.
-- Validaciones en backend para países, actividades y relaciones país/actividad.
+⚙️ Installation
+Clone repository
+git clone https://github.com/Eduman8/PI-Countries.git
+Backend Setup
+cd api
+npm install
+npm start
+Backend Environment Variables
 
+Create an .env file inside /api:
 
+DATABASE_URL=your_database_url
+CLIENT_URL=http://localhost:3000
+Frontend Setup
+cd client
+npm install
+npm start
+Frontend Environment Variables
 
-## Autor y contacto
+Create an .env file inside /client:
 
-**Eduardo Damián Gómez**
+REACT_APP_API_URL=http://localhost:3001
+🌐 Production URLs
+Frontend
 
-- GitHub: [Eduman8](https://github.com/Eduman8)
-- LinkedIn: [Eduardo Damián Gómez](https://www.linkedin.com/in/eduardo-dami%C3%A1n-g%C3%B3mez-89a432217/)
+https://countries-nine-liard.vercel.app/
+
+Backend API
+
+https://pi-countries-v8x5.onrender.com
+
+👨‍💻 Author
+
+Eduardo Damián Gómez
+
+<p align="left"> <a href="https://github.com/Eduman8" target="_blank"> <img src="https://img.shields.io/badge/GitHub-Eduman8-181717?style=for-the-badge&logo=github"> </a> <a href="https://www.linkedin.com/in/eduardo-dami%C3%A1n-g%C3%B3mez-89a432217/" target="_blank"> <img src="https://img.shields.io/badge/LinkedIn-Eduardo_Gómez-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"> </a> </p>
